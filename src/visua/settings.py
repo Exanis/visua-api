@@ -1,6 +1,11 @@
+"""
+Visua API settings
+Those settings should not be modified as this file load most of its values from environment
+Please pass correct values to your env file instead
+"""
 import environ
 
-env = environ.Env(
+ENV = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
     DATABASE_URL=(str, 'sqlite:////tmp/virtua.db'),
@@ -8,11 +13,11 @@ env = environ.Env(
 )
 
 # Environment-base parameters
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+SECRET_KEY = ENV('SECRET_KEY')
+DEBUG = ENV('DEBUG')
+ALLOWED_HOSTS = ENV('ALLOWED_HOSTS')
 DATABASES = {
-    'default': env.db()
+    'default': ENV.db()
 }
 
 

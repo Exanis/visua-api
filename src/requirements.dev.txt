@@ -1,0 +1,5 @@
+-r requirements.txt
+coverage==4.5.1
+codecov==2.0.15
+pylint==1.9.2
+pylint-django==0.11.1

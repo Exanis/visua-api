@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Exanis/visua-api.svg?branch=master)](https://travis-ci.org/Exanis/visua-api)
+[![codecov](https://codecov.io/gh/Exanis/visua-api/branch/master/graph/badge.svg)](https://codecov.io/gh/Exanis/visua-api)
+
 # visua-api
 API part for Visua
 

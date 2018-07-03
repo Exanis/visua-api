@@ -1,0 +1,7 @@
+[run]
+branch = True
+omit = visua/*
+    manage.py
+
+[report]
+fail_under = 100

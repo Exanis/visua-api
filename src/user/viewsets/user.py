@@ -1,6 +1,6 @@
+from user import serializers, models, permissions
 from django.conf import settings
 from rest_framework import viewsets, decorators, response, status, filters
-from user import serializers, models, permissions
 
 
 class User(viewsets.ModelViewSet):
@@ -16,12 +16,12 @@ class User(viewsets.ModelViewSet):
         return serializers.User
 
     @decorators.action(methods=['GET'], detail=False)
-    def me(self, request):
+    def me(self, request):  # pylint: disable=invalid-name
         serialized = self.get_serializer(request.user)
         return response.Response(data=serialized.data)
 
     @decorators.action(methods=['POST'], detail=False)
-    def logout(self, request):
+    def logout(self, request):  # pylint: disable=no-self-use
         ret = response.Response(status=status.HTTP_204_NO_CONTENT)
         ret.delete_cookie(settings.JWT_AUTH['JWT_AUTH_COOKIE'])
         return ret

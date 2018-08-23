@@ -1,8 +1,8 @@
+from user.models import User as UserModel
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers, validators
-from user.models import User as UserModel
 
 
 class User(serializers.ModelSerializer):
@@ -92,21 +92,21 @@ class User(serializers.ModelSerializer):
             'min_length': 'errorPasswordTooShort',
         }
     )
-    
-    def validate(self, data):
+
+    def validate(self, attrs):
         user = self.instance
         if user is None:
-            user = UserModel(**data)
+            user = UserModel(**attrs)
 
-        if 'password' in data:
+        if 'password' in attrs:
             try:
-                validate_password(data.get('password'), user=user)
-                data['password'] = make_password(data['password'])
-            except ValidationError as e:
+                validate_password(attrs.get('password'), user=user)
+                attrs['password'] = make_password(attrs['password'])
+            except ValidationError as error:
                 raise serializers.ValidationError({
-                    'password': list(e.messages)
+                    'password': list(error.messages)
                 })
-        return super(User, self).validate(data)
+        return super(User, self).validate(attrs)
 
     class Meta(object):
         model = UserModel
@@ -122,6 +122,6 @@ class User(serializers.ModelSerializer):
 
 class AdminUser(User):
     is_staff = serializers.BooleanField(required=False, default=False)
-    
+
     class Meta(User.Meta):
         fields = User.Meta.fields + ['is_staff']

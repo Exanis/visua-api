@@ -3,10 +3,10 @@ from rest_framework import routers
 from pipeline import viewsets
 
 
-router = routers.DefaultRouter()
-router.register('', viewsets.Pipeline)
+ROUTER = routers.DefaultRouter()
+ROUTER.register('', viewsets.Pipeline)
 
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(ROUTER.urls))
 ]

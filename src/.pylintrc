@@ -1,2 +1,5 @@
 [MESSAGES CONTROL]
-disable=F0401
+disable=F0401, C0111
+
+[MASTER]
+ignore=migrations,tests

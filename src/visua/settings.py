@@ -20,16 +20,16 @@ DATABASES = {
     'default': ENV.db()
 }
 
-
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'user',
+    'pipeline'
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -42,3 +42,22 @@ MIDDLEWARE = [
 ]
 ROOT_URLCONF = 'visua.urls'
 WSGI_APPLICATION = 'visua.wsgi.application'
+AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 15
+}
+
+JWT_AUTH = {
+    'JWT_AUTH_COOKIE': 'Token',
+    'JWT_GET_USER_SECRET_KEY': lambda u: u.secret_key,
+    'JWT_ISSUER': 'Visua',
+    'JWT_ALLOW_REFRESH': True
+}

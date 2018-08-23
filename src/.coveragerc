@@ -1,6 +1,8 @@
 [run]
 branch = True
 omit = visua/*
+    .env/*
+    venv/*
     manage.py
 
 [report]

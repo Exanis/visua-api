@@ -1,10 +1,18 @@
 language: python
+addons:
+  postgresql: "9.4"
+services:
+  - postgresql
 python:
   - "3.6"
 before_install:
   - cd src
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 install:
   - pip install -r requirements.dev.txt
+env:
+  - DATABASE_URL=pgsql://postgres@localhost/travis_ci_test
 script:
   - coverage run --source='.' manage.py test
   - coverage report

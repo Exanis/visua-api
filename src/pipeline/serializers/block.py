@@ -1,3 +1,4 @@
+import json
 from rest_framework import serializers
 from pipeline import models
 
@@ -26,8 +27,16 @@ class Block(serializers.ModelSerializer):
             'data': error
         })
 
+    # Note: Not covering some lines here because when testing, DRF check json first and decode it,
+    # but when the server is actually running, it does not so we need to decode it ourselves
+    # Also for some reasons pylint is not seeing a member of json class ?
     def validate(self, attrs):
         data = attrs['data']
+        if isinstance(data, str):  # pragma: no cover
+            try:  # pragma: no cover
+                data = json.loads(data)  # pragma: no cover
+            except json.JSONDecodeError:  # pragma: no cover pylint: disable=no-member
+                Block._error('errorInvalidData')  # pragma: no cover
         if 'apiVersion' not in data:
             Block._error('errorMissingApiVersion')
         if data['apiVersion'] not in ACCEPTED_VERSIONS:

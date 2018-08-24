@@ -11,4 +11,6 @@ WORKDIR /app
 
 RUN chmod +x start.sh
 
+ENV PYTHONUNBUFFERED True
+
 CMD ./start.sh

@@ -1,8 +1,13 @@
 language: python
+services:
+  - postgresql
 python:
   - "3.6"
 before_install:
   - cd src
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - export DATABASE_URL=pgsql://postgres@localhost/travis_ci_test
 install:
   - pip install -r requirements.dev.txt
 script:

@@ -8,6 +8,10 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.crypto import get_random_string
 
 
+def make_secret_key():
+    return get_random_string(length=32)
+
+
 class User(AbstractUser):
     uuid = models.UUIDField(
         primary_key=True,
@@ -16,5 +20,5 @@ class User(AbstractUser):
     )
     secret_key = models.CharField(
         max_length=32,
-        default=get_random_string(length=32)
+        default=make_secret_key
     )

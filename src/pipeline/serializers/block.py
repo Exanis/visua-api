@@ -1,4 +1,3 @@
-import json
 from rest_framework import serializers
 from pipeline import models
 
@@ -18,12 +17,7 @@ class Block(serializers.ModelSerializer):
         })
 
     def validate(self, attrs):
-        if 'data' not in attrs or not attrs['data']:
-            Block._error('errorRequired')
-        try:
-            data = json.loads(attrs['data'])
-        except json.JSONDecodeError:
-            Block._error('errorInvalidJson')
+        data = attrs['data']
         if 'apiVersion' not in data:
             Block._error('errorMissingApiVersion')
         if data['apiVersion'] not in ACCEPTED_VERSIONS:
@@ -48,7 +42,7 @@ class Block(serializers.ModelSerializer):
             Block._error('errorMissingVarsOutput')
         if not isinstance(data['varsOutput'], list):
             Block._error('errorInvalidVarsOutput')
-        if 'image' not in data:
+        if 'image' not in data or not data['image']:
             Block._error('errorMissingImage')
         attrs['name'] = data['name']
         return attrs

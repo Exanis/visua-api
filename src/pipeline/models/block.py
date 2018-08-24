@@ -5,7 +5,7 @@ from django.contrib.postgres.fields.jsonb import JSONField
 
 class Block(models.Model):
     uuid = models.UUIDField(primary_key=True, editable=False, default=uuid4)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default='')
     data = JSONField()
 
     class Meta(object):

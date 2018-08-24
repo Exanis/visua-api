@@ -10,6 +10,16 @@ class Block(serializers.ModelSerializer):
         read_only=True
     )
 
+    data = serializers.JSONField(
+        required=True,
+        allow_null=False,
+        error_messages={
+            'required': 'errorMissingData',
+            'null': 'errorMissingData',
+            'invalid': 'errorInvalidData',
+        }
+    )
+
     @staticmethod
     def _error(error):
         raise serializers.ValidationError({

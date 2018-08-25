@@ -1,7 +1,7 @@
 from json import dumps
 from user.models import User
 from pipeline import models
-from rest_framework.test import RequestsClient, APITestCase, APILiveServerTestCase
+from rest_framework.test import APITestCase
 
 
 class BlockDataTestCase(APITestCase):

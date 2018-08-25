@@ -15,6 +15,14 @@ class BlockDataTestCase(APITestCase):
             'password': 'test'
         })
 
+    def test_list(self):
+        self._login()
+        for i in range(30):
+            models.Block.objects.create(data='{}', name='test')
+        result = self.client.get('/api/project/block/all/')
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(len(result.data), 30)
+
     def test_correct_data(self):
         self._login()
         result = self.client.post(

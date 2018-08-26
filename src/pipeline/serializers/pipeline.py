@@ -34,3 +34,8 @@ class Pipeline(serializers.ModelSerializer):
             'uuid',
             'name'
         ]
+
+
+class FullPipeline(Pipeline):
+    class Meta(Pipeline.Meta):
+        fields = Pipeline.Meta.fields + ['model']

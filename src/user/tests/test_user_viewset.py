@@ -24,6 +24,16 @@ class UserTestCase(TestCase):
         assert result.status_code == 200
 
     @staticmethod
+    def test_user_refresh_token():
+        client = APIClient()
+        client.post('/api/user/auth/login/', {
+            'username': 'test',
+            'password': 'test'
+        })
+        result = client.post('/api/user/auth/refresh/')
+        assert result.status_code == 200
+
+    @staticmethod
     def test_user_logout():
         client = APIClient()
         client.post('/api/user/auth/login/', {

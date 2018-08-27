@@ -1,2 +1,2 @@
 from .user import User
-from .token import refresh_jwt_token
+from .token import REFRESH_JWT_TOKEN

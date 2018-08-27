@@ -7,6 +7,12 @@ from rest_framework_jwt.settings import api_settings
 class RefreshCookieJSONWebTokenSerializer(RefreshJSONWebTokenSerializer):
     token = serializers.CharField(required=False)
 
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass
+
     def validate(self, attrs):
         attrs['token'] = self.context['request'].COOKIES.get(api_settings.JWT_AUTH_COOKIE)
         return super(RefreshCookieJSONWebTokenSerializer, self).validate(attrs)
@@ -16,4 +22,4 @@ class RefreshCookeJSONWebToken(JSONWebTokenAPIView):
     serializer_class = RefreshCookieJSONWebTokenSerializer
 
 
-refresh_jwt_token = RefreshCookeJSONWebToken.as_view()
+REFRESH_JWT_TOKEN = RefreshCookeJSONWebToken.as_view()

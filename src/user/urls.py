@@ -10,6 +10,6 @@ ROUTER.register('', viewsets.User)
 
 urlpatterns = [
     path('auth/login/', obtain_jwt_token),
-    path('auth/refresh/', refresh_jwt_token),
+    path('auth/refresh/', viewsets.refresh_jwt_token),
     path('', include(ROUTER.urls))
 ]

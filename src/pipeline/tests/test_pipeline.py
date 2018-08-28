@@ -3,7 +3,7 @@ from user.models import User
 from pipeline import models
 
 
-class UserAppTestCase(APITestCase):
+class PipelineTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
         User.objects.create_user('test', password='test')

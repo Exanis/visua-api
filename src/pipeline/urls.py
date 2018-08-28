@@ -6,6 +6,7 @@ from pipeline import viewsets
 ROUTER = routers.DefaultRouter()
 ROUTER.register('pipeline', viewsets.Pipeline)
 ROUTER.register('block', viewsets.Block)
+ROUTER.register('runner', viewsets.Runner)
 
 
 urlpatterns = [

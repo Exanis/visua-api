@@ -17,3 +17,9 @@ class Runner(serializers.ModelSerializer):
             'last_update',
             'alive'
         ]
+
+
+class RunnerWithKey(Runner):
+    class Meta(Runner.Meta):
+        fields = Runner.Meta.fields + ['key']
+        read_only_fields = Runner.Meta.fields + ['key']

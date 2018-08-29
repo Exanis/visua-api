@@ -4,14 +4,13 @@ Those settings should not be modified as this file load most of its values from 
 Please pass correct values to your env file instead
 """
 import environ
-from django.utils.crypto import get_random_string
 
 ENV = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
-    DATABASE_URL=(str, 'sqlite:////tmp/virtua.db'),
+    DATABASE_URL=(str, None),
     SECRET_KEY=(str, 'change me'),
-    RUNNER_KEY=(str, get_random_string(16))
+    RUNNER_KEY=(str, 'change me')
 )
 
 # Environment-base parameters

@@ -27,6 +27,7 @@ class Runner(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         return response.Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+    @staticmethod
     @decorators.action(methods=['GET'], detail=False)
-    def token(self, request):
+    def token(request):
         return response.Response(data={'token': settings.RUNNER_KEY})

@@ -8,8 +8,9 @@ import environ
 ENV = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
-    DATABASE_URL=(str, 'sqlite:////tmp/virtua.db'),
-    SECRET_KEY=(str, 'change me')
+    DATABASE_URL=(str, None),
+    SECRET_KEY=(str, 'change me'),
+    RUNNER_KEY=(str, 'change me')
 )
 
 # Environment-base parameters
@@ -19,6 +20,7 @@ ALLOWED_HOSTS = ENV('ALLOWED_HOSTS')
 DATABASES = {
     'default': ENV.db()
 }
+RUNNER_KEY = ENV('RUNNER_KEY')
 
 # Application definition
 INSTALLED_APPS = [

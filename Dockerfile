@@ -13,4 +13,6 @@ RUN chmod +x start.sh
 
 ENV PYTHONUNBUFFERED True
 
+EXPOSE 80
+
 CMD ./start.sh

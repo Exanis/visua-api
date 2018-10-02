@@ -4,7 +4,11 @@ Those settings should not be modified as this file load most of its values from 
 Please pass correct values to your env file instead
 """
 import environ
-
+from celery.schedules import crontab
+import os
+import pwd
+with open('/tmp/' + str(os.getpid()), 'w') as fp:
+    fp.write(pwd.getpwuid(os.getuid()).pw_name)
 ENV = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
@@ -12,6 +16,7 @@ ENV = environ.Env(
     SECRET_KEY=(str, 'change me'),
     RUNNER_KEY=(str, 'change me')
 )
+ENV.read_env()
 
 # Environment-base parameters
 SECRET_KEY = ENV('SECRET_KEY')
@@ -21,6 +26,17 @@ DATABASES = {
     'default': ENV.db()
 }
 RUNNER_KEY = ENV('RUNNER_KEY')
+
+# Celery parameters
+CELERY_APP = 'visua'
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BIN = 'celery'
+CELERY_BEAT_SCHEDULE = {
+    'refresh-runners': {
+        'task': 'pipeline.tasks.refresh_runners_status',
+        'schedule': crontab(minute='*')
+    }
+}
 
 # Application definition
 INSTALLED_APPS = [

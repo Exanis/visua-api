@@ -1,0 +1,5 @@
+CELERY_BIN="/usr/local/bin/celery"
+CELERY_APP="visua:celery_app"
+CELERYBEAT_CHDIR="/app"
+ENABLED=true
+CELERYD_SU_ARGS="-l"

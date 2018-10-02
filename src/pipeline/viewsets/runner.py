@@ -2,12 +2,11 @@ from django.conf import settings
 from rest_framework import (
     viewsets,
     filters,
-    permissions,
     response,
     status,
     decorators
 )
-from pipeline import serializers, models
+from pipeline import serializers, models, permissions
 
 
 class Runner(viewsets.ModelViewSet):
@@ -15,7 +14,7 @@ class Runner(viewsets.ModelViewSet):
     queryset = models.Runner.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ('name',)
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.Runner]
     serializer_class = serializers.Runner
 
     def create(self, request, *args, **kwargs):
